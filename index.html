@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="./index.js"></script>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <title>BlackJack</title>
+</head>
+<body>
+    <h1>Welcome to the Big Boyzzz table!</h1>
+    <div id="play-area">
+        <h2>Dealer's Hand</h2>
+        <div id="ai-div">
+            <img id="ai1" class="card" src="https://opengameart.org/sites/default/files/card%20back%20red.png">
+            <img id="ai2" class="card" src="https://opengameart.org/sites/default/files/card%20back%20red.png">        
+        </div>
+        <div id="player-div">
+            <img id="player1" class="card" src="https://opengameart.org/sites/default/files/card%20back%20red.png">
+            <img id="player2" class="card" src="https://opengameart.org/sites/default/files/card%20back%20red.png">
+        </div>
+        <div>
+            <p id="playerCount"></p>
+        </div>
+    </div>
+    <div id="bet-area">
+        <button id="deal" type="button">Deal</button>
+        <p id="bet-display"></p>
+        <form id="bet-form">
+            <input id="bet-amount" type="number" name="bet" placeholder="Care to wager?"/>
+            <button id="place-bet" type="submit">Place your bet!</button>
+        </form>
+        <button class="reveal" type="button">Show Dealer Hand</button>
+        <button id="hit-me" type="button">Hit Me!</button>
+        <form id="reset-form">
+            <button id="reset" type="submit">Shuffle</button>
+        </form>
+    </div>
+</body>
+</html>
