@@ -28,7 +28,7 @@ function renderCards(data){
      cardValues.forEach(ele => {
         if(ele.value === "ACE") {
             console.log(ele)
-           return ele = 11
+           return ele.value = 11
         } else if(ele.value === "KING" || ele.value === "QUEEN" || ele.value === "JACK") {
             console.log(ele)
             return ele.value = 10
