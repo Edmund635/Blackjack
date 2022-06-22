@@ -17,29 +17,24 @@ function renderCards(data){
     player2.addEventListener("mouseleave", () => {
         player2.src = "https://opengameart.org/sites/default/files/card%20back%20black.png"
     })
+
+    let dealer1 = document.querySelector('#ai1');
+    let dealer2 = document.querySelector('#ai2');
+
+    dealer1.src = data.cards[2].image;
+    dealer2.src = "https://opengameart.org/sites/default/files/card%20back%20black.png";
     
-     let c1v = data.cards[0]
-     let c2v = data.cards[1]
-     let c3v = data.cards[2]
-     let c4v = data.cards[3]
+    //  let c1v = data.cards[0]
+    //  let c2v = data.cards[1]
+    //  let c3v = data.cards[2]
+    //  let c4v = data.cards[3]
 
-     let cardValues = [c1v, c2v, c3v, c4v]
+    //  let cardValues = [c1v, c2v, c3v, c4v]
 
-     cardValues.forEach((ele) => faceCardFixer(ele))
+    //  cardValues.forEach((ele) => faceCardFixer(ele))
+    data.cards.forEach((ele) => faceCardFixer(ele))
 
-     
-        
-    function faceCardFixer(ele) {
-       if(ele.value === "ACE") {
-             return ele.value = 11
-        } else if(ele.value === "KING" || ele.value === "QUEEN" || ele.value === "JACK") {
-            return ele.value = 10
-        } else 
-            return ele.value
-     }
-     
-    
-    let playerHand = [player1, player2];
+    //let playerHand = [player1, player2];
     let pValue = 0;
     
     for(let counter = 0; counter < playerHand.length; counter++){
@@ -48,22 +43,13 @@ function renderCards(data){
     let playerCount = document.querySelector('#playerCount');
     playerCount.textContent = pValue;
 
-    
-
-
-    let dealer1 = document.querySelector('#ai1');
-    let dealer2 = document.querySelector('#ai2');
-
-
-    dealer1.src = data.cards[2].image;
-    dealer2.src = "https://opengameart.org/sites/default/files/card%20back%20black.png";
-
     let dValue = 0;
     for(let counter = 2; counter < data.cards.length; counter++){
         dValue += parseInt(cardValues[counter].value);
     }
     let dealerCount = document.querySelector("#dealerCount")
     dealerCount.textContent = dValue
+
     console.log(dValue)
 
     // while(dValue < 17) {
@@ -107,6 +93,15 @@ function renderCards(data){
     })
 }
 
+function faceCardFixer(ele) {
+    if(ele.value === "ACE") {
+          return ele.value = 11
+     } else if(ele.value === "KING" || ele.value === "QUEEN" || ele.value === "JACK") {
+         return ele.value = 10
+     } else 
+         return ele.value
+  }
+
 let purseDisplay = document.querySelector("#purse-display")
 
 let betForm = document.querySelector("#bet-form")
@@ -119,13 +114,11 @@ betForm.addEventListener("submit", function(event) {
     
     let purseDisplayAmount = purseDisplay.textContent
     purseDisplayAmount -= betAmount
-<<<<<<< Updated upstream
     //console.log(purseDisplayAmount)
     purseDisplay.textContent = `$${purseDisplayAmount}`
     betForm.reset();
-=======
+
     purseDisplay.textContent = purseDisplayAmount
->>>>>>> Stashed changes
 })
 
 
