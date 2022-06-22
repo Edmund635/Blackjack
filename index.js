@@ -55,19 +55,21 @@ function renderCards(data){
 
     dealer1.src = data.cards[2].image;
     dealer2.src = "https://opengameart.org/sites/default/files/card%20back%20black.png";
+
+    let dValue = 0;
+    for(let counter = 2; counter < data.cards.length; counter++){
+        dValue += parseInt(cardValues[counter].value);
+    }
+    let dealerCount = document.querySelector("#dealerCount")
+    dealerCount.textContent = dValue
+
     let revealButton = document.querySelector('.reveal');
     revealButton.addEventListener('click', function(event){
         dealer2.src = data.cards[3].image;
         player2.src = data.cards[1].image;
     })
 
-    let dValue = 0;
-
-    for(let counter = 2; counter < data.cards.length; counter++){
-        dValue += parseInt(cardValues[counter].value);
-    }
-    let dealerCount = document.querySelector("#dealerCount")
-    dealerCount.textContent = dValue
+    
     
     
     let hitMe = document.querySelector('#hit-me');
@@ -85,6 +87,22 @@ function renderCards(data){
         })
     })
 }
+
+let betForm = document.querySelector("#bet-form")
+betForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    let betDisplay = document.querySelector("#bet-display")
+    let betAmount = document.querySelector("#bet-amount").value
+    betDisplay.textContent = `$${betAmount} racks`
+
+    let purseDisplay = document.querySelector("#purse-display")
+    let purseDisplayAmount = parseInt(purseDisplay.textContent)
+    console.log(purseDisplayAmount)
+    console.log(betAmount)
+    purseDisplayAmount -= betAmount
+    //console.log(purseDisplayAmount)
+    purseDisplay.textContent = `$${purseDisplayAmount}`
+})
 
 
 
