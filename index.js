@@ -66,33 +66,23 @@ function renderCards(data){
     dealerCount.textContent = dValue
     console.log(dValue)
 
-    while(dValue < 17) {
-        fetch(`http://deckofcardsapi.com/api/deck/${data.deck_id}/draw/?count=1`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-        let newCard = document.createElement('img');
-        newCard.src = data.cards[0].image;
-        let dealerDiv = document.querySelector('#dealer-div');
-        dealerDiv.append(newCard);
+    // while(dValue < 17) {
+    //     fetch(`http://deckofcardsapi.com/api/deck/${data.deck_id}/draw/?count=1`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data)
+    //     let newCard = document.createElement('img');
+    //     newCard.src = data.cards[0].image;
+    //     let dealerDiv = document.querySelector('#dealer-div');
+    //     dealerDiv.append(newCard);
 
-        faceCardFixer(data.cards[0])
-        console.log(data.cards[0].value)
-        dValue += parseInt(data.cards[0].value)
-        dealerCount.textContent = dValue;
-        })
-    }
+    //     faceCardFixer(data.cards[0])
+    //     console.log(data.cards[0].value)
+    //     dValue += parseInt(data.cards[0].value)
+    //     dealerCount.textContent = dValue;
+    //     })
+    // }
 
-    let revealButton = document.querySelector('.reveal');
-    revealButton.addEventListener('click', function(event){
-        dealer2.src = data.cards[3].image;
-        player2.src = data.cards[1].image;
-        
-    })
-
-    
-    
-    
     let hitMe = document.querySelector('#hit-me');
     hitMe.addEventListener('click', function(event){
         fetch(`http://deckofcardsapi.com/api/deck/${data.deck_id}/draw/?count=1`)
@@ -109,23 +99,33 @@ function renderCards(data){
         playerCount.textContent = pValue;
         })
     })
+
+    let revealButton = document.querySelector('.reveal');
+    revealButton.addEventListener('click', function(event){
+        dealer2.src = data.cards[3].image;
+        player2.src = data.cards[1].image;
+    })
 }
+
+let purseDisplay = document.querySelector("#purse-display")
 
 let betForm = document.querySelector("#bet-form")
 betForm.addEventListener("submit", function(event) {
     event.preventDefault();
     let betDisplay = document.querySelector("#bet-display")
     let betAmount = document.querySelector("#bet-amount").value
-    betDisplay.textContent = `$${betAmount} racks`
+    betDisplay.textContent = `${betAmount} racks`
 
-    let purseDisplay = document.querySelector("#purse-display")
+    
     let purseDisplayAmount = purseDisplay.textContent
-    console.log(purseDisplayAmount)
-    console.log(betAmount)
     purseDisplayAmount -= betAmount
+<<<<<<< Updated upstream
     //console.log(purseDisplayAmount)
     purseDisplay.textContent = `$${purseDisplayAmount}`
     betForm.reset();
+=======
+    purseDisplay.textContent = purseDisplayAmount
+>>>>>>> Stashed changes
 })
 
 
