@@ -125,6 +125,7 @@ betForm.addEventListener("submit", function(event) {
     purseDisplayAmount -= betAmount
     //console.log(purseDisplayAmount)
     purseDisplay.textContent = `$${purseDisplayAmount}`
+    betForm.reset();
 })
 
 
