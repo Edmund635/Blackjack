@@ -1,4 +1,6 @@
 let purseDisplay = document.querySelector("#purse-display")
+let purseDisplayAmount = purseDisplay.textContent
+let betDisplay = document.querySelector("#bet-display")
 let betAmount;
 let betForm = document.querySelector("#bet-form")
     betForm.addEventListener("submit", function(event) {
@@ -7,7 +9,7 @@ let betForm = document.querySelector("#bet-form")
     betAmount = document.querySelector("#bet-amount").value
     betDisplay.textContent = `${betAmount} racks`
 
-    let purseDisplayAmount = purseDisplay.textContent
+    
     purseDisplayAmount -= betAmount
     //console.log(purseDisplayAmount)
     purseDisplay.textContent = `$${purseDisplayAmount}`
@@ -141,11 +143,15 @@ function renderCards(data){
 
         if(dValue < 22 && dValue >= pValue) {
                 alert("The House always wins! Click Shuffle")
+                betDisplay.textContent = ""
         } else if (dValue < 22 && pValue > dValue) {
                 alert("You Win!!!")
                 purseDisplay.textContent = `${(betAmount * 2) + purseDisplayAmount}`
+                betDisplay.textContent = ""
         }else {
             alert("Dealer busts, You win!")
+            purseDisplay.textContent = `${(betAmount * 2) + purseDisplayAmount}`
+            betDisplay.textContent = ""
         }
     })
 }
