@@ -25,16 +25,33 @@ function renderCards(data){
 
      let cardValues = [c1v, c2v, c3v, c4v]
 
-     cardValues.forEach(ele => {
+     cardValues.forEach(ele => faceCardFixer(ele))
+        
+        function faceCardFixer(ele) {
         if(ele.value === "ACE") {
             console.log(ele)
-           return ele.value = 11
+            alert("Click Ace and choose 1 or 11")
+            let oneBtn = document.createElement("button")
+            oneBtn.innerHTML = "One"
+            let elevenBtn = document.createElement("button")
+            elevenBtn.innerHTML = "Eleven"
+            let btnDiv = document.querySelector("#one-or-eleven")
+            btnDiv.append(oneBtn, elevenBtn)
+
+            oneBtn.addEventListener("click", function(event) {
+                return ele.value = 1
+            }, {once: true})
+            elevenBtn.addEventListener("click", function(event) {
+                return ele.value = 11
+            }, {once: true})
+             
+           
         } else if(ele.value === "KING" || ele.value === "QUEEN" || ele.value === "JACK") {
             console.log(ele)
             return ele.value = 10
         } else 
             return ele.value
-     })
+     }
      
     
     let playerHand = [player1, player2];
@@ -81,6 +98,8 @@ function renderCards(data){
         newCard.src = data.cards[0].image;
         let playerDiv = document.querySelector('#player-div');
         playerDiv.append(newCard);
+
+        faceCardFixer(data.cards[0])
         
         pValue += parseInt(data.cards[0].value)
         playerCount.textContent = pValue;
@@ -103,6 +122,8 @@ betForm.addEventListener("submit", function(event) {
     //console.log(purseDisplayAmount)
     purseDisplay.textContent = `$${purseDisplayAmount}`
 })
+
+
 
 
 
