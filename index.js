@@ -128,31 +128,27 @@ function renderCards(data){
             dealerDiv.append(newCard);
             console.log(data.cards[i].value)
             dValue += parseInt(data.cards[i].value)
-            
             ++i
         }
-    })
-
+        
+            dealer2.src = data.cards[3].image;
+            player2.src = data.cards[1].image;
+            dealerCount.textContent = dValue;
     
-
-    let revealButton = document.querySelector('.reveal');
-    revealButton.addEventListener('click', function(event){
-        dealer2.src = data.cards[3].image;
-        player2.src = data.cards[1].image;
-        dealerCount.textContent = dValue;
-
-        if(dValue < 22 && dValue >= pValue) {
-                alert("The House always wins! Click Shuffle")
-                betDisplay.textContent = ""
-        } else if (dValue < 22 && pValue > dValue) {
-                alert("You Win!!!")
+            if(dValue < 22 && dValue >= pValue) {
+                    alert("The House always wins! Click Shuffle")
+                    betDisplay.textContent = ""
+            } else if (dValue < 22 && pValue > dValue) {
+                    alert("You Win!!!")
+                    purseDisplay.textContent = `${(betAmount * 2) + purseDisplayAmount}`
+                    betDisplay.textContent = ""
+            }else {
+                alert("Dealer busts, You win!")
                 purseDisplay.textContent = `${(betAmount * 2) + purseDisplayAmount}`
                 betDisplay.textContent = ""
-        }else {
-            alert("Dealer busts, You win!")
-            purseDisplay.textContent = `${(betAmount * 2) + purseDisplayAmount}`
-            betDisplay.textContent = ""
-        }
+            }
+        
+        
     })
 }
 
