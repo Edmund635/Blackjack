@@ -29,7 +29,7 @@ function renderCards(data){
 
      
         
-        function faceCardFixer(ele) {
+    function faceCardFixer(ele) {
        if(ele.value === "ACE") {
              return ele.value = 11
         } else if(ele.value === "KING" || ele.value === "QUEEN" || ele.value === "JACK") {
