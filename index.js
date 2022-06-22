@@ -55,13 +55,11 @@ function renderCards(data){
 
      let cardValues = [c1v, c2v, c3v, c4v]
 
-    cardValues.forEach((ele) => faceCardFixer(ele))
-    
 
     let playerHand = [player1, player2];
     let pValue = 0;
     
-    for(let counter = 0; counter < playerHand.length; counter++){
+    for(let counter = 0; counter < 2; counter++){
         pValue += parseInt(cardValues[counter].value);
     }
     let playerCount = document.querySelector('#playerCount');
@@ -76,6 +74,8 @@ function renderCards(data){
     //dealerCount.textContent = dValue
 
     console.log(dValue)
+
+
 
     
 
