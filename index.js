@@ -25,29 +25,14 @@ function renderCards(data){
 
      let cardValues = [c1v, c2v, c3v, c4v]
 
-     cardValues.forEach(ele => faceCardFixer(ele))
+     cardValues.forEach((ele) => faceCardFixer(ele))
+
+     
         
         function faceCardFixer(ele) {
-        if(ele.value === "ACE") {
-            console.log(ele)
-            alert("Click Ace and choose 1 or 11")
-            let oneBtn = document.createElement("button")
-            oneBtn.innerHTML = "One"
-            let elevenBtn = document.createElement("button")
-            elevenBtn.innerHTML = "Eleven"
-            let btnDiv = document.querySelector("#one-or-eleven")
-            btnDiv.append(oneBtn, elevenBtn)
-
-            oneBtn.addEventListener("click", function(event) {
-                return ele.value = 1
-            }, {once: true})
-            elevenBtn.addEventListener("click", function(event) {
-                return ele.value = 11
-            }, {once: true})
-             
-           
+       if(ele.value === "ACE") {
+             return ele.value = 11
         } else if(ele.value === "KING" || ele.value === "QUEEN" || ele.value === "JACK") {
-            console.log(ele)
             return ele.value = 10
         } else 
             return ele.value
@@ -79,11 +64,30 @@ function renderCards(data){
     }
     let dealerCount = document.querySelector("#dealerCount")
     dealerCount.textContent = dValue
+    console.log(dValue)
+
+    while(dValue < 17) {
+        fetch(`http://deckofcardsapi.com/api/deck/${data.deck_id}/draw/?count=1`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        let newCard = document.createElement('img');
+        newCard.src = data.cards[0].image;
+        let dealerDiv = document.querySelector('#dealer-div');
+        dealerDiv.append(newCard);
+
+        faceCardFixer(data.cards[0])
+        console.log(data.cards[0].value)
+        dValue += parseInt(data.cards[0].value)
+        dealerCount.textContent = dValue;
+        })
+    }
 
     let revealButton = document.querySelector('.reveal');
     revealButton.addEventListener('click', function(event){
         dealer2.src = data.cards[3].image;
         player2.src = data.cards[1].image;
+        
     })
 
     
@@ -115,7 +119,7 @@ betForm.addEventListener("submit", function(event) {
     betDisplay.textContent = `$${betAmount} racks`
 
     let purseDisplay = document.querySelector("#purse-display")
-    let purseDisplayAmount = parseInt(purseDisplay.textContent)
+    let purseDisplayAmount = purseDisplay.textContent
     console.log(purseDisplayAmount)
     console.log(betAmount)
     purseDisplayAmount -= betAmount
@@ -126,6 +130,3 @@ betForm.addEventListener("submit", function(event) {
 
 
 
-
-
-   
