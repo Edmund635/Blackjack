@@ -3,7 +3,8 @@ let purseDisplayAmount = purseDisplay.textContent
 let betDisplay = document.querySelector("#bet-display")
 let betAmount;
 let betForm = document.querySelector("#bet-form")
-    betForm.addEventListener("submit", function(event) {
+
+betForm.addEventListener("submit", function(event) {
     event.preventDefault();
     let betDisplay = document.querySelector("#bet-display")
     betAmount = document.querySelector("#bet-amount").value
@@ -11,15 +12,10 @@ let betForm = document.querySelector("#bet-form")
 
     
     purseDisplayAmount -= betAmount
-    //console.log(purseDisplayAmount)
-    purseDisplay.textContent = `$${purseDisplayAmount}`
     purseDisplay.textContent = purseDisplayAmount
     betForm.reset();
 })
-// // if(!betForm.reset()){
-// //     alert("Please place wager!")
-// // }
-// else{
+
 let deal = document.querySelector('#deal');
 deal.addEventListener('click', function(event){
 fetch('http://deckofcardsapi.com/api/deck/new/draw/?count=10')
@@ -93,11 +89,13 @@ function renderCards(data){
         
         pValue += parseInt(data.cards[0].value)
         playerCount.textContent = pValue;
+
+        let playerHandValues = playerHand.map(card => card.value)
         
-        playerHand.forEach((card) => {
-            if (pValue > 21 && playerHand.includes(card.value === 11) === true) {
-            let found = playerHand.find(ele => ele.value === 11)
-            return found.value = 1
+        playerHandValues.forEach((value) => {
+            if (pValue > 21 && playerHandValues.includes(value === 11) === true) {
+            let found = playerHandValues.find(val => val === 11)
+            return found = 1
             }
         })
         console.log(pValue)
