@@ -36,7 +36,14 @@ let deal = document.querySelector('#deal');
 deal.addEventListener('click', function(event){
 fetch('http://deckofcardsapi.com/api/deck/new/draw/?count=10')
 .then(res => res.json())
-.then(data=> renderCards(data));
+.then(data => {
+    if (!betAmount){
+        alert("Place a real wager")
+    } else {
+    renderCards(data)
+    }
+});
+
 })
 
 function renderCards(data){
@@ -150,8 +157,9 @@ function renderCards(data){
             dealerCount.textContent = dValue;
 
             
-            
-            if(dValue < 22 && dValue >= pValue) {
+            if(pValue > 21) {
+                alert("Um... you busted, click Shuffle")
+            } else if(dValue < 22 && dValue >= pValue) {
                     alert("The House always wins! Click Shuffle")
                     betDisplay.textContent = ""
                     let purseL = {
