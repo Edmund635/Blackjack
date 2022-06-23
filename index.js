@@ -115,6 +115,10 @@ function renderCards(data){
             }
             if (pValue > 21) {
                 alert("You busted!!! Click Shuffle")
+                let purseL = {
+                    amount: purseDisplayAmount
+                }
+                prusePatcher(purseL)
             }
             })
     })
@@ -150,18 +154,42 @@ function renderCards(data){
             if(dValue < 22 && dValue >= pValue) {
                     alert("The House always wins! Click Shuffle")
                     betDisplay.textContent = ""
+                    let purseL = {
+                        amount: purseDisplayAmount
+                    }
+                    prusePatcher(purseL)
             } else if (dValue < 22 && pValue > dValue) {
                     alert("You Win!!!")
                     purseDisplay.textContent = `${(betAmount * 2) + purseDisplayAmount}`
                     betDisplay.textContent = ""
+                    let purseW = {
+                        amount: purseDisplay.textContent
+                    }
+                    prusePatcher(purseW) 
             }else {
                 alert("Dealer busts, You win!")
                 purseDisplay.textContent = `${(betAmount * 2) + purseDisplayAmount}`
                 betDisplay.textContent = ""
+                let purseW = {
+                    amount: purseDisplay.textContent
+                }
+                prusePatcher(purseW)
             }
         
         
     })
+}
+
+function prusePatcher(purseObj) {
+    fetch("http://localhost:3000/purse/1", {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(purseObj)
+    })
+    .then(res => res.json())
+    .then(purse => console.log(purse))
 }
 
 
