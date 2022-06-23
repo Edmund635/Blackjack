@@ -200,8 +200,6 @@ function prusePatcher(purseObj) {
     .then(purse => console.log(purse))
 }
 
-
-
 function faceCardFixer(ele) {
     if(ele.value === "ACE") {
           return ele.value = '11'
@@ -210,37 +208,3 @@ function faceCardFixer(ele) {
      } else 
          return ele.value
   }
-
-// }
-
-
-
-// create function to return total value of hand 
-// parameters: array of card objects
-// check array to see if there is an ace => filter or find
-// if no ace, just total all cards
-// if there is an ace attempt to total all cards with 11
-// if number goes over 21 total all cards with ace as a 1
-
-
-let nicksHand = [{card: 10, suit: "Diamonds"}, {card: "Ace", suit: "Diamonds"}]
-let edmundsHand = [{card: 8, suit: "Heards"},  {card: 2, suit: "Hearts"}, {card: "Ace", suit: "Hearts"}, {card: "Ace", suit: "clubs"}]
-
-function totalHand(hand){
-    // sort to ace last first
-   return  hand.reduce((cardTotal, card) => {
-    console.log(card)
-    //console.log(cardTotal)
-        if( card.card === "Ace"){
-            if (cardTotal > 10){
-                return cardTotal + 1
-            } else {
-                return cardTotal + 11
-            }
-        } else if (card.card === "Jack"){
-            return cardTotal + 10
-        } else {
-            return cardTotal + card.card
-        }
-    }, 0)
-} 
