@@ -91,11 +91,15 @@ function renderCards(data){
         playerCount.textContent = pValue;
 
         let playerHandValues = playerHand.map(card => card.value)
+        console.log(playerHandValues)
+        console.log(pValue)
         
         playerHandValues.forEach((value) => {
-            if (pValue > 21 && playerHandValues.includes(value === 11) === true) {
-            let found = playerHandValues.find(val => val === 11)
-            return found = 1
+            if (pValue > 21 && playerHandValues.includes(value === '11') === true) {
+                console.log(pValue)
+            let found = playerHandValues.find(val => val === '11')
+            console.log(found)
+            return found = '1'
             }
         })
         console.log(pValue)
@@ -145,9 +149,9 @@ function renderCards(data){
 
 function faceCardFixer(ele) {
     if(ele.value === "ACE") {
-          return ele.value = 11
+          return ele.value = '11'
      } else if(ele.value === "KING" || ele.value === "QUEEN" || ele.value === "JACK") {
-         return ele.value = 10
+         return ele.value = '10'
      } else 
          return ele.value
   }
