@@ -71,7 +71,7 @@ function renderCards(data){
     let playerHand = [data.cards[0], data.cards[1]];
     let dealerHand = [data.cards[2], data.cards[3]];
 
-
+    let found = false;
     let hitMe = document.querySelector('#hit-me');
     hitMe.addEventListener('click', function(event){
         player2.src = data.cards[1].image;
@@ -91,25 +91,19 @@ function renderCards(data){
         playerCount.textContent = pValue;
 
         let playerHandValues = playerHand.map(card => card.value)
-        console.log(playerHandValues)
-        console.log(pValue)
         
-        playerHandValues.forEach((value) => {
-            if (pValue > 21 && playerHandValues.includes(value === '11') === true) {
-                console.log(pValue)
-            let found = playerHandValues.find(val => val === '11')
-            console.log(found)
-            return found = '1'
+            if (pValue > 21 && found === false && playerHandValues.includes('11') === true) {
+                found = true
+                pValue -=10;
+                playerCount.textContent = pValue;
             }
-        })
-        console.log(pValue)
         if (pValue > 21) {
             alert("You busted!!! Click Shuffle")
         }
         })
     })
 
-
+    let find = false;
     let standBtn = document.querySelector("#stand")
     standBtn.addEventListener("click", function(event) {
         while(dValue < 17) {
@@ -122,6 +116,13 @@ function renderCards(data){
             console.log(data.cards[i].value)
             dValue += parseInt(data.cards[i].value)
             ++i
+            let dealerHandValues = dealerHand.map(card => card.value)
+        
+            if (dValue > 21 && find === false && dealerHandValues.includes('11') === true) {
+                find = true
+                dValue -=10;
+                dealerCount.textContent = dValue;
+            }
         }
         
             dealer2.src = data.cards[3].image;
@@ -129,7 +130,7 @@ function renderCards(data){
             dealerCount.textContent = dValue;
 
             
-    
+            
             if(dValue < 22 && dValue >= pValue) {
                     alert("The House always wins! Click Shuffle")
                     betDisplay.textContent = ""
