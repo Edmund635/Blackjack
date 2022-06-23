@@ -1,8 +1,18 @@
 let purseDisplay = document.querySelector("#purse-display")
-let purseDisplayAmount = purseDisplay.textContent
+let purseDisplayAmount;
 let betDisplay = document.querySelector("#bet-display")
 let betAmount;
 let betForm = document.querySelector("#bet-form")
+
+fetch("http://localhost:3000/purse")
+.then(res => res.json())
+.then (purse => {
+    console.log(purse)
+    purseDisplayAmount = (purse[0].amount)
+    console.log(purseDisplayAmount)
+    purseDisplay.textContent = purseDisplayAmount
+})
+
 
 
 betForm.addEventListener("submit", function(event) {
@@ -153,6 +163,8 @@ function renderCards(data){
         
     })
 }
+
+
 
 function faceCardFixer(ele) {
     if(ele.value === "ACE") {
