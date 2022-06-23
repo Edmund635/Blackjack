@@ -4,15 +4,21 @@ let betDisplay = document.querySelector("#bet-display")
 let betAmount;
 let betForm = document.querySelector("#bet-form")
 
+
 betForm.addEventListener("submit", function(event) {
     event.preventDefault();
     let betDisplay = document.querySelector("#bet-display")
     betAmount = document.querySelector("#bet-amount").value
-    betDisplay.textContent = `${betAmount} racks`
 
-    
-    purseDisplayAmount -= betAmount
-    purseDisplay.textContent = purseDisplayAmount
+    if(parseInt(betAmount) > parseInt(purseDisplayAmount)){
+        alert("YOU DON'T HAVE THAT MUCH MONEY!!!");
+    }
+    else{
+        purseDisplayAmount -= betAmount
+        purseDisplay.textContent = purseDisplayAmount
+        betDisplay.textContent = parseInt(betDisplay.textContent) + parseInt(betAmount)
+    }
+    //$('#'+place_bet).prop("disabled",true);
     betForm.reset();
 })
 
@@ -97,10 +103,10 @@ function renderCards(data){
                 pValue -=10;
                 playerCount.textContent = pValue;
             }
-        if (pValue > 21) {
-            alert("You busted!!! Click Shuffle")
-        }
-        })
+            if (pValue > 21) {
+                alert("You busted!!! Click Shuffle")
+            }
+            })
     })
 
     let find = false;
