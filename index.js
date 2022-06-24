@@ -8,17 +8,22 @@ fetch("http://localhost:3000/purse")
 })
 
 let deposit_form = document.querySelector('#deposit-form')
-let deposit_amount = document.querySelector('#deposit-amount')
 let deposit_button = document.querySelector('#deposit-button')
 deposit_form.addEventListener('submit', function(event){
     event.preventDefault()
-    purseDisplay.textContent = parseInt(deposit_amount.value) + parseInt(purseDisplayAmount)
-    purseDisplayAmount = purseDisplay.textContent
-    let purseW = {
-        amount: purseDisplayAmount
+    let deposit_amount = document.querySelector('#deposit-amount').value
+    if(!deposit_amount){
+        alert("Stop Being Broke!!")
     }
-    prusePatcher(purseW)
-    deposit_form.reset()
+    else{
+        purseDisplay.textContent = parseInt(deposit_amount) + parseInt(purseDisplayAmount)
+        purseDisplayAmount = purseDisplay.textContent
+        let purseW = {
+        amount: purseDisplayAmount
+        }
+        prusePatcher(purseW)
+    }
+        deposit_form.reset()
 })
 
 let betDisplay = document.querySelector("#bet-display")
