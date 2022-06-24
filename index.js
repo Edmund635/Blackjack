@@ -12,7 +12,7 @@ let deposit_button = document.querySelector('#deposit-button')
 deposit_form.addEventListener('submit', function(event){
     event.preventDefault()
     let deposit_amount = document.querySelector('#deposit-amount').value
-    if(!deposit_amount){
+    if(!deposit_amount || deposit_amount < 0){
         alert("Stop Being Broke!!")
     }
     else{
