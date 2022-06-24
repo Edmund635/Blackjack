@@ -37,7 +37,7 @@ deal.addEventListener('click', function(event){
 fetch('http://deckofcardsapi.com/api/deck/new/draw/?count=10')
 .then(res => res.json())
 .then(data => {
-    if (!betAmount){
+    if (betDisplay.textContent <= 0){
         alert("Place a real wager")
     } else {
     renderCards(data)
@@ -168,7 +168,7 @@ function renderCards(data){
                     prusePatcher(purseL)
             } else if (dValue < 22 && pValue > dValue) {
                     alert("You Win!!!")
-                    purseDisplay.textContent = `${(betAmount * 2) + purseDisplayAmount}`
+                    purseDisplay.textContent = `${(betDisplay.textContent * 2) + purseDisplayAmount}`
                     betDisplay.textContent = ""
                     let purseW = {
                         amount: purseDisplay.textContent
@@ -176,7 +176,7 @@ function renderCards(data){
                     prusePatcher(purseW) 
             }else {
                 alert("Dealer busts, You win!")
-                purseDisplay.textContent = `${(betAmount * 2) + purseDisplayAmount}`
+                purseDisplay.textContent = `${(betDisplay.textContent * 2) + purseDisplayAmount}`
                 betDisplay.textContent = ""
                 let purseW = {
                     amount: purseDisplay.textContent
