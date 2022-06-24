@@ -114,7 +114,20 @@ h3 {
     font-size: 9px;
 
 } 
+
+#player-div{
+    border: #000000;
+    border-style: double;
+    border-width: 8px;
+}
+#ai-div{
+    border: #000000;
+    border-style: double;
+    border-width: 8px;
+
+}
+
 .card{
-    height : 314px;
-    width : 226px
+    height : 188px;
+    width : 135px
 }
