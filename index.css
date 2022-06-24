@@ -20,6 +20,18 @@ body {
         background-position: 0% 50%;
     }
 }
+
+#player-div{
+    border: #000000;
+    border-style: double;
+    border-width: 8px;
+}
+#ai-div{
+    border: #000000;
+    border-style: double;
+    border-width: 8px;
+
+}
 h1 {
     font-size: 60px;
     background: -webkit-radial-gradient(rgb(178, 178, 178), rgb(49, 49, 49));
@@ -104,6 +116,6 @@ h3 {
 
 
 .card{
-    height : 314px;
-    width : 226px
+    height : 150px;
+    width : 120px;
 }
