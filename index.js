@@ -116,9 +116,9 @@ function renderCards(data){
         let find2 = false;
         let dealerHandValues1 = dealerHand.map(card => card.value)
         if (dValue > 21 && find1 === false && dealerHandValues1.includes('11') === true) {
-                find1 = true
-                dValue -=10;
-                dealerCount.textContent = dValue;
+            find1 = true
+            dValue -=10;
+            dealerCount.textContent = dValue;
         }
         while(dValue < 17 && dValue < pValue && pValue < 22) {
             let newCard = document.createElement('img');
