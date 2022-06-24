@@ -32,7 +32,7 @@ let betForm = document.querySelector("#bet-form")
 betForm.addEventListener("submit", function(event) {
     event.preventDefault();
     betAmount = document.querySelector("#bet-amount").value
-    if(!betAmount){
+    if(!betAmount || betAmount < 0){
         alert("Stop Being Broke!!")
     }
     else{
@@ -46,20 +46,21 @@ betForm.addEventListener("submit", function(event) {
         }
     }
     betForm.reset();
+    let deal = document.querySelector('#deal');
+    deal.addEventListener('click', function(event){
+        fetch('http://deckofcardsapi.com/api/deck/new/draw/?count=10')
+        .then(res => res.json())
+        .then(data => {
+            if (betDisplay.textContent <= 0){
+                alert("Place a real wager")
+            } else {
+            renderCards(data)
+            }
+        })
+    }, {once: true})
 })
 
-let deal = document.querySelector('#deal');
-deal.addEventListener('click', function(event){
-    fetch('http://deckofcardsapi.com/api/deck/new/draw/?count=10')
-    .then(res => res.json())
-    .then(data => {
-        if (betDisplay.textContent <= 0){
-            alert("Place a real wager")
-        } else {
-        renderCards(data)
-        }
-    })
-}, {once: true})
+
 
 function renderCards(data){
     data.cards.forEach((ele) => faceCardFixer(ele));
@@ -162,6 +163,7 @@ function renderCards(data){
         dealer2.src = data.cards[3].image;
         player2.src = data.cards[1].image;
         dealerCount.textContent = dValue;
+        purseDisplay.textContent = purseDisplayAmount
         if(pValue > 21) {
             alert("Um... you busted, click Shuffle")
             let purseL = {
@@ -177,18 +179,20 @@ function renderCards(data){
             prusePatcher(purseL)
         } else if(dValue < 22 && pValue > dValue) {
             alert("You Win!!!")
-            purseDisplay.textContent = `${(betDisplay.textContent * 2) + purseDisplayAmount}`
+            purseDisplay.textContent = `${parseInt(betDisplay.textContent * 2) + parseInt(purseDisplayAmount)}`
+            purseDisplayAmount = purseDisplay.textContent
             betDisplay.textContent = ""
             let purseW = {
-                amount: purseDisplay.textContent
+                amount: purseDisplayAmount
             }
             prusePatcher(purseW) 
         }else {
             alert("Dealer busts, You win!")
-            purseDisplay.textContent = `${(betDisplay.textContent * 2) + purseDisplayAmount}`
+            purseDisplay.textContent = `${parseInt((betDisplay.textContent * 2)) + parseInt(purseDisplayAmount)}`
+            purseDisplayAmount = purseDisplay.textContent
             betDisplay.textContent = ""
             let purseW = {
-                amount: purseDisplay.textContent
+                amount: purseDisplayAmount
             }
             prusePatcher(purseW)
         }
