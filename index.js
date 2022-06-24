@@ -32,13 +32,18 @@ let betForm = document.querySelector("#bet-form")
 betForm.addEventListener("submit", function(event) {
     event.preventDefault();
     betAmount = document.querySelector("#bet-amount").value
-    if(parseInt(betAmount) > parseInt(purseDisplayAmount)){
-        alert("YOU DON'T HAVE THAT MUCH MONEY!!!");
+    if(!betAmount){
+        alert("Stop Being Broke!!")
     }
     else{
-        purseDisplayAmount -= betAmount
-        purseDisplay.textContent = purseDisplayAmount
-        betDisplay.textContent = parseInt(betDisplay.textContent) + parseInt(betAmount)
+        if(parseInt(betAmount) > parseInt(purseDisplayAmount)){
+            alert("YOU DON'T HAVE THAT MUCH MONEY!!!");
+        }
+        else{
+            purseDisplayAmount -= betAmount
+            purseDisplay.textContent = purseDisplayAmount
+            betDisplay.textContent = parseInt(betDisplay.textContent) + parseInt(betAmount)
+        }
     }
     betForm.reset();
 })
@@ -54,7 +59,7 @@ deal.addEventListener('click', function(event){
         renderCards(data)
         }
     })
-})
+}, {once: true})
 
 function renderCards(data){
     data.cards.forEach((ele) => faceCardFixer(ele));
